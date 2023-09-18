@@ -22,9 +22,12 @@ client와 server는 현재 origin이 다르다
 port만 다르다고 데이터를 막 꺼내서 사용해도 될까?
 아래의 예시를 참고해보자
 
-naver.com, google.com 이 있다고 가정해보자 naver.com와 googl.com은 도메인이 다르다.
-여기서는 막 꺼내서 사용해된다는 부분을 여기에 적용하면 말이 안되는 사실일 것이다.
+naver.com, google.com 이 있다고 가정해보자 naver.com와 google.com은 도메인이 다르다.
+여기서는 막 꺼내서 사용해야된다는 부분을 여기에 적용하면 말이 안되는 사실일 것이다.
 따라서 오리진이 다르면 무조건 막도록 정책이 설계되어있는 것이다.
+
+### 도메인
+
 
 ### CORS로 막아버린 정책은 client, server 둘중 누가 풀어줄까?
 데이터를 줄지 말지에 대한 여부는 server가 정한다.
