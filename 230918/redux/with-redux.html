@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.1/redux.js">
+</script>
 <body>
     <style>
         .container{
@@ -15,19 +17,24 @@
     <div id="red"></div>
     <script>
 function reducer(state, action){
+    console.log("state:",state, "action: ",action)
     if(state === undefined){
         return {color: 'yellow'}
     }
+    if(action.type === 'CHANGE_COLOR'){
+        state.color = 'red'
+    }
+    return state
 }
 const store = Redux.createStore(reducer)
 console.log(store.getState())
 function red(){
+    const state = store.getState()
     document.querySelector('#red').innerHTML = `
-        <div class="container" id="component_red">
+        <div class="container" id="component_red" style="background-color:${state.color}">
             <h1>red</h1>
             <input type="button" value="fire" onclick="
-            document.querySelector('#component_red').style.backgroundColor = 'red'
-            ">
+            store.dispatch({type:'CHANGE_COLOR', color:'red'})"/>
         </div>
     `
 }

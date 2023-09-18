@@ -33,3 +33,23 @@ Redux.createStore(reducer)
 ```
 
 store를 처음 만들때 store의 state 값의 초기 값이 필요한데 
+
+### 정리
+store를 만들면 내부적으로 state값이 생기고, state값을 가져올 때는 getState를 사용해야한다. 
+reducer를 통해서 state값을 만들어주어야하는데 reducer의 기존 state 값이 undefined이면 
+초기화를 위해서 최초로 실행되는 reducer에 대한 호출이므로 원하는 초기 값을 return 해주면, 
+redux의 store에는 해당 초기값이 지정이 된다.
+
+### state값 변경시키기 
+state를 변경시키기 위해서는 action을 만들고, dispatch에게 제출하면 dispatch가 reducer를 호출하는데
+이전의 state값과 action의 값을 동시에 준다.
+reducer함수가 이 값들을 분석해서, state에 최종적인 값을 return해주게 된다.
+
+### dispatch
+store의 dispatch를 호출하게 되면 dispatch는 store를 생성할 때 제공한 reducer함수를 
+호출하도록 약속되어있다. 이전의 state값과 전달된 action의 값을 인자로 준다
+
+```js
+// 중괄호부분이 액션이다.
+store.dispatch({type:'CHANGE_COLOR', color:'red'})
+```
