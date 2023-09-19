@@ -53,3 +53,47 @@ store의 dispatch를 호출하게 되면 dispatch는 store를 생성할 때 제�
 // 중괄호부분이 액션이다.
 store.dispatch({type:'CHANGE_COLOR', color:'red'})
 ```
+
+### redo, undo..?
+immutavality 강의 듣기
+
+```js
+// state: store의 state값
+function reducer(state, action){
+
+}
+```
+
+### 객체를 복제하기
+```js
+// 첫번째 인자로 빈 객체, 두번째 인자 빈객체의 복제할 속성
+object.assign({},{name:'sunghee'}, {city:'seoul'})
+// 복사된 개체
+{name:'sunghee', city: 'seoul'}
+```
+
+원래는 아래와 같이 state를 직접 변경했는데
+```js
+function reducer(state, action){
+    console.log("state:",state, "action: ",action)
+    if(state === undefined){
+        return {color: 'yellow'}
+    }
+    return state
+}
+```
+
+아래와 같이 state를 복제하고 color를 red로 준 결과를 return한다. 
+```js
+function reducer(state, action){
+    console.log("state:",state, "action: ",action)
+    if(state === undefined){
+        return {color: 'yellow'}
+    }
+    var newState
+    if(action.type === 'CHANGE_COLOR'){
+        newState = Object.assign({}, state, {color:'red'})
+    }
+    return newState
+}
+```
