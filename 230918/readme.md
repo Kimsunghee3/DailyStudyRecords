@@ -72,7 +72,7 @@ object.assign({},{name:'sunghee'}, {city:'seoul'})
 {name:'sunghee', city: 'seoul'}
 ```
 
-원래는 아래와 같이 state를 직접 변경했는데
+이전에는 아래와 같이 원본인 state를 직접 변경했는데
 ```js
 function reducer(state, action){
     console.log("state:",state, "action: ",action)
@@ -83,7 +83,9 @@ function reducer(state, action){
 }
 ```
 
-아래와 같이 state를 복제하고 color를 red로 준 결과를 return한다. 
+지금은 state를 복제하고, 그 복제한 것의 color를 red로 준 결과를 return한다. 
+그러면 reducer가 실행될 때 마다 return되는 값이 새로운 state값이 되고, 각각의 state 값들이
+서로 완전히 독립된 복제된 결과들이 return된다. 
 ```js
 function reducer(state, action){
     console.log("state:",state, "action: ",action)
@@ -96,4 +98,45 @@ function reducer(state, action){
     }
     return newState
 }
+```
+
+### reducer함수의 역할
+store의 state값을 변경해준다.
+action의 값과 이전의 state값을 이용해서 새로운 state값을 return해주면
+그 return된 값이 새로운 state값이된다.
+return하는 값은 원본을 바꾸는 것이 아닌 이전에 있었던 값을 복제한 결과를 return해야지만 
+우리가 redux를 사용하는 효용들을 최대한으로 사용할 수 있다.
+
+
+기존의 코드에서는 서로 강하게 의존하고 있어서 하나의 코드가 지워지면 나머지 코드
+마저 사용할 수 없게 된다.
+
+redux는 중앙 집중적으로 코드를 관리하게 되므로 각각의 부품들은 상태가 바꼈을때,
+action을 store에 dispatch해주고 어떻게 변화해야하는지 store에 구독을 해놓으면 
+그때마다 자신의 모양을 바꿀 수 있다.
+
+### 리덕스를 사용하는 이유
+리덕스를 사용하지 않고 코드를 짜게 되면 코드간의 의존성이 높아져 하나의 상태가 바뀌면 전부 다 수정을 해줘야한다.
+리덕스를 사용하게 되면 하나의 상태가 바뀌어도 다른 코드를 수정할 필요가 없기에 자신이 해야할일만 하면 된다.
+중앙에서store를 통해 state를 관리하여 서로간의 의존성을 줄인다.
+
+
+### redux dev tools
+사용법
+개발자 도구로 redux를 열어주고 아래와 같이 설정해주자
+```js
+const store = Redux.createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+```
+redux devtools를 사용하면 이전에 실행된 모습들을 되돌려볼 수 있다(time travel)
+
+### action을 했을 때 그에 따른 상태를 보고싶다면?
+redux는 모든 관리해야하는 상태들을 store(단일 store)에 담고 있다.
+redux는 단 하나의 store를 유지하며, store는 reducer에 의해 가공된다.
+application의 상태가 궁금하다면 reducer를 사용하면 된다.
+```js
+// state:이전 상태, newState: 새로운 상태
+console.log(action.type, action, state, newState)
 ```
