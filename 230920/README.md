@@ -1,13 +1,13 @@
 ### Redux toolkit
-Redux
+Redux(createStore, subscribe, getState, dispatch)
 - 상태관리
 - 프로그램이 동작하는데 필요한 데이터를 체계적으로 관리해준다. 
 - Redux 자체는 react와는 무관하다.(javascript의 전역상태를 관리하기 위해서 사용하기 때문)
 
-React Redux
+React Redux(connect, useDispatch, useSelector)
 - 리액트에서 redux를 편하게 사용할 수 있는 툴
 
-Redux toolkit
+Redux toolkit(configureStore, createSlice, createAsyncThunk )
 등장배경
 - 설정해야할 것이 너무 많음, 미들웨어설치, 반복되는 코드, 불변성 유지의 어려움
 
