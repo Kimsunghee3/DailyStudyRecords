@@ -47,3 +47,24 @@ html파일, 기타파일 보관
 
 # package.json
 라이브러리 버전, 프로젝트 설정 기록
+
+### 데이터 바인딩
+js데이터를 html에 꽂아넣는 문법
+사용하는 이유
+- html에 하드코딩으로 직접 데이터를 입력해줘도 되지만, 나중에 변경이 어려우므로 데이터 바인딩을 사용한다.
+```js
+<script>
+export default {
+  name: 'App',
+  data(){
+    return {
+      // 데이터 보관함
+      // 데이터는object자료 형태로 저장
+      {}
+    }
+  },
+  components: {
+  }
+}
+</script>
+```
